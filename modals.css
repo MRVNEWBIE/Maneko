@@ -1,0 +1,217 @@
+/* GLOBAL MODAL OVERLAY (PDP & Video) */
+.pdp-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+.pdp-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* MODAL CONTAINERS */
+.pdp-modal, .video-modal-container, .success-modal-container {
+    background: var(--bg);
+    border: var(--border);
+    border-radius: 20px;
+    box-shadow: 10px 10px 0 var(--black);
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pdp-modal, .video-modal-container {
+    max-width: 900px;
+}
+
+.success-modal-container {
+    max-width: 480px;
+    padding: 30px;
+}
+
+.pdp-overlay.active .pdp-modal, 
+.pdp-overlay.active .video-modal-container {
+    transform: translateY(0);
+}
+
+/* PDP MODAL SPECIFIC LAYOUT */
+.pdp-content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.pdp-image-gallery {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdp-main-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 15px;
+    border: var(--border);
+    box-shadow: 8px 8px 0 var(--black);
+}
+
+.pdp-info-panel {
+    flex: 1.5;
+    min-width: 300px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdp-info-panel h2 {
+    font-family: var(--font-bold);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--black);
+}
+
+.pdp-price {
+    font-family: var(--font-bold);
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.category-badge {
+    background: var(--bg);
+    border: var(--border);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-family: var(--font-bold);
+    font-size: 0.8rem;
+    width: fit-content;
+    box-shadow: 4px 4px 0 var(--black);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    transform: rotate(-2deg);
+}
+
+.pdp-facts {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.fact-tag {
+    background: var(--accent);
+    border: 2px solid var(--black);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: var(--font-bold);
+    box-shadow: 3px 3px 0 var(--black);
+}
+
+.pdp-description {
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+.pdp-action-zone {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: auto;
+}
+
+.pdp-add-to-bag {
+    flex: 1;
+    height: 50px;
+}
+
+/* IMAGE LIGHTBOX POPUP */
+.image-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease;
+    cursor: zoom-out;
+}
+.image-popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+.image-popup-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border: 5px solid var(--bg);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.image-popup-overlay.active .image-popup-content {
+    transform: scale(1);
+}
+
+/* GLOBAL CLOSE BUTTON */
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--bg);
+    border: var(--border);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    font-family: var(--font-bold);
+}
+
+.modal-close-btn:hover {
+    transform: scale(1.1) rotate(0deg);
+    background: var(--accent);
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+/* VIDEO MODAL IFRAME SIZING */
+.video-modal-container {
+    padding: 40px 20px 20px;
+    overflow: visible;
+}
+
+.video-modal-container iframe {
+    width: 100%;
+    aspect-ratio: 9/16;
+    max-height: 70vh;
+    border: var(--border);
+    border-radius: 10px;
+    background: var(--black);
+}

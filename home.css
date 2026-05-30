@@ -1,0 +1,190 @@
+.hero-section { 
+    padding: 120px 20px; background: var(--primary); 
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 0);
+    background-size: 25px 25px;
+    background-attachment: fixed;
+}
+
+.hero-section > * {
+    animation: page-fade-in 0.8s ease-in-out forwards;
+}
+.hero-logo-img {
+    width: clamp(250px, 60vw, 450px);
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    filter: drop-shadow(8px 8px 0 var(--black));
+}
+.hero-section p { 
+    font-family: var(--font-bold);
+    font-weight: 700; 
+    font-size: 1.5rem; 
+    margin-top: 20px; 
+    color: var(--white);
+    text-align: center;
+    letter-spacing: 1px; 
+}
+.hero-section .btn-big {
+    font-size: 2rem;
+    padding: 20px 60px;
+    background: var(--accent);
+    color: var(--black);
+    margin-top: 30px;
+    box-shadow: 12px 12px 0 var(--black);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.hero-section .btn-big:hover { transform: scale(1.1); background: var(--bg); }
+.hero-section .hero-sub { margin-top: 0; }
+.hero-section .hero-loc { margin-top: 10px; }
+
+/* RECOMMENDED MENU SECTION */
+.recommended-menu-section {
+    background: var(--bg);
+    padding: 80px 20px;
+    border-bottom: var(--border);
+}
+
+/* Prevent slider track from clipping neubrutalist card shadows and borders */
+#menu-slider {
+    padding: 30px 0; /* Increase vertical padding */
+    margin: 0 -15px; /* Slight negative margin to compensate for track padding */
+}
+
+.splide__track {
+    padding: 25px !important; /* Create internal space so shadows aren't cut off */
+    margin: -25px !important; /* Pull the track back to its original alignment */
+    overflow: visible !important; /* Try to allow shadows to bleed, though track usually needs hidden */
+    /* If overflow: visible breaks the slider, the padding/margin combo above fixes the clipping */
+}
+
+/* Campus Talk title now uses the same style as Recommended Menu from components.css */
+
+/* MARQUEE REVIEWS */
+.campus-talk {
+    background: var(--primary);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 0);
+    background-size: 25px 25px;
+    background-attachment: fixed;
+    padding: 80px 0; overflow: hidden; }
+.marquee-window { width: 100%; overflow: hidden; padding: 20px 0; }
+.marquee-track { display: flex; width: max-content; will-change: transform; }
+.marquee-content { display: flex; flex-shrink: 0; } /* Retain initial display */
+.marquee-window:hover .marquee-track { /* Remove animation-play-state: paused; */ }
+
+.scroll-left { animation: scroll-left 25s linear infinite; }
+.scroll-right { animation: scroll-right 25s linear infinite; }
+
+/* VISION WRAPPER (To ensure fixed background behind the vision card) */
+.vision-section {
+    background: var(--primary);
+}
+
+.review-box { 
+    background: var(--bg); 
+    border: var(--border); 
+    padding: 30px 50px; 
+    border-radius: 20px; 
+    font-family: var(--font-bold); 
+    box-shadow: 10px 10px 0 var(--black);
+    margin-right: 40px; font-size: 1.5rem; width: 350px; height: 180px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* CUSTOM SPLIDE ARROWS */
+.splide__arrow { background: var(--accent) !important; border: var(--border) !important; opacity: 1 !important; box-shadow: 4px 4px 0 var(--black); }
+.splide__arrow svg { fill: var(--black) !important; }
+
+/* STORY SECTION (HOME PAGE) */
+.story-section {
+    background: var(--bg);
+    border: var(--border);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 12px 12px 0 var(--black);
+    max-width: 850px;
+    margin: 40px auto;
+    position: relative;
+    z-index: 2;
+}
+
+.story-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.story-text {
+    flex: 1.5;
+    text-align: left;
+}
+
+.story-text h2 {
+    font-size: 1.15rem; /* Reduced to be smaller than the 1.4rem "Our Founder's Vision" label */
+    padding: 8px 20px;
+    line-height: 1.5;
+    transform: rotate(0.5deg);
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.story-accent {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 10px 25px;
+    border: var(--border);
+    border-radius: 50px;
+    font-family: var(--font-bold);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    box-shadow: 6px 6px 0 var(--black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none !important;
+    outline: none;
+}
+
+.story-text p {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--black);
+    font-weight: 600;
+}
+
+.owner-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    border: 6px solid var(--black);
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 10px 10px 0 var(--accent);
+    margin-bottom: 15px;
+}
+
+.owner-name {
+    font-family: var(--font-bold);
+    font-size: 1.1rem;
+    text-align: center;
+    color: var(--black);
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .story-section { padding: 40px 20px; }
+    .story-text { text-align: center; }
+    .story-text h2 { font-size: 1.1rem; }
+}

@@ -1,0 +1,114 @@
+.menu-container { 
+    max-width: 1200px; 
+    margin: 80px auto; 
+    padding: 80px 40px 40px; 
+    background-color: var(--primary); /* Reverted to the clipboard board style */
+    border: var(--border);
+    border-radius: 20px;
+    box-shadow: 15px 15px 0 var(--black);
+    position: relative;
+    z-index: 1;
+}
+
+/* The sheet of paper filled with foods */
+.menu-paper {
+    background-color: var(--bg);
+    background-image: 
+        repeating-linear-gradient(transparent, transparent 31px, rgba(242, 183, 53, 0.15) 31px, rgba(242, 183, 53, 0.15) 32px);
+    background-size: 100% 32px;
+    padding: 100px 40px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 3px solid var(--black);
+    border-radius: 5px;
+    position: relative;
+    z-index: 5;
+    box-shadow: 15px 15px 0 var(--black);
+}
+
+/* The Clipboard Metal Clip - Attached to board to pop out correctly */
+.menu-container::before {
+    content: "";
+    position: absolute;
+    top: -45px; /* Protrudes above the red container */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px; 
+    height: 120px; 
+    background: #bdc3c7; /* Silver Metallic */
+    border: var(--border);
+    border-radius: 15px 15px 5px 5px;
+    box-shadow: 8px 8px 0 var(--black);
+    z-index: 10;
+}
+
+/* The Clip Hole / Handle - Adjusted for board alignment */
+.menu-container::after {
+    content: "";
+    position: absolute;
+    top: -75px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 45px;
+    background: var(--black); /* Represents the hollow hole of the clip */
+    border: var(--border);
+    border-radius: 50px;
+    z-index: 11;
+}
+
+.menu-paper .section-title {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: var(--border);
+    border-radius: 12px;
+    box-shadow: 6px 6px 0 var(--black);
+    margin-bottom: 60px;
+}
+
+.menu-category { 
+    grid-column: 1 / -1; 
+    font-family: var(--font-bold); 
+    margin-top: 40px; 
+    text-align: left; 
+    border-bottom: var(--border); 
+    padding-bottom: 10px; 
+    position: relative;
+}
+
+.menu-category::before {
+    content: "URGENT";
+    position: absolute;
+    top: -60px; right: 20px;
+    background: var(--accent); 
+    border: var(--border);
+    padding: 5px 15px; 
+    font-family: var(--font-bold);
+    transform: rotate(5deg); 
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.menu-add-btn {
+    background: var(--primary); color: var(--white); font-weight: 700;
+    height: 55px; /* Fixed height for perfect match */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px; 
+    border-radius: 15px; 
+    box-shadow: 4px 4px 0 var(--black);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border: var(--border);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.menu-add-btn:hover {
+    /* Transition shared with price-tag inside card hover state */
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--black);
+}

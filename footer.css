@@ -1,0 +1,173 @@
+.main-footer {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 50px 20px;
+    border-top: var(--border);
+    text-align: center;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-left-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.footer-right-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.footer-center-logo {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer-logo-img {
+    max-width: 220px;
+    height: auto;
+    filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.3));
+}
+
+.footer-mascot-animation {
+    font-size: 1.2rem;
+    animation: none; /* Removed floating animation */
+    display: inline-block; /* Display inline with text */
+    vertical-align: middle; /* Align with text vertically */
+    margin-left: 5px; /* Small space between text and mascot */
+    color: var(--white);
+}
+
+.footer-mascot-text {
+    display: none; /* Removed the "Thank you" text as requested */
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    font-family: var(--font-bold);
+    font-size: 1.2rem;
+    border: 2px solid var(--white);
+    padding: 10px 30px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.1);
+}
+
+.footer-nav a:nth-child(1) { /* Home button */
+    background: var(--white);
+    color: var(--black);
+}
+
+.footer-nav a:nth-child(2) { /* Menu button */
+    background: var(--accent);
+    color: var(--black);
+}
+
+.footer-nav a:nth-child(3) { /* Story button */
+    background: var(--primary);
+    color: var(--white);
+}
+
+.footer-nav a:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--white);
+}
+
+.footer-socials { 
+    display: flex; gap: 20px; 
+    flex-wrap: wrap; margin: 0; 
+}
+.footer-socials a { 
+    color: inherit; 
+    text-decoration: none; 
+    font-family: var(--font-bold);
+    font-weight: 700; 
+    transition: 0.2s; 
+    letter-spacing: 0.5px;
+    background: var(--white);
+    color: var(--black);
+    padding: 6px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--white);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.footer-socials a img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.footer-socials a:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.footer-socials a.ig-logo:hover { background: #ee2a7b; color: white; }
+.footer-socials a.tt-logo:hover { background: #000; color: white; }
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    gap: 10px;
+}
+
+.footer-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: white !important;
+    padding: 10px 25px;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    border: 3px solid var(--black);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    font-family: var(--font-bold);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.footer-whatsapp:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
+    background: #128C7E;
+}
+
+.main-footer p {
+    text-align: center;
+    color: var(--white);
+    width: 100%;
+    margin-top: 40px;
+    font-size: 0.95rem;
+}

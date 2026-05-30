@@ -1,0 +1,273 @@
+/* Menu Page Grid Layout */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+}
+
+/* Responsive Menu Grid */
+@media (max-width: 1024px) {
+    .menu-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .menu-grid { grid-template-columns: repeat(1, 1fr); }
+}
+
+/* Food Card (Menu Page) */
+.shop-card { 
+    background: var(--white); 
+    border: var(--border); 
+    border-radius: 20px; 
+    padding: 20px; 
+    box-shadow: 8px 8px 0 var(--black); 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+    box-sizing: border-box;
+    margin: 0; /* Removed to fix grid fitting; spacing is handled by gap */
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    animation: menu-card-fade-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes menu-card-fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.shop-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 12px 12px 0 var(--black);
+    z-index: 5;
+}
+.shop-card img { 
+    width: 100%; 
+    aspect-ratio: 1/1; 
+    object-fit: cover; 
+    border-radius: 15px; 
+    border: 2px solid var(--black); 
+    margin-bottom: 12px; 
+}
+
+/* Social Media Grid (Home Page) */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.social-card {
+    border: var(--border);
+    border-radius: 20px;
+    overflow: visible;
+    box-shadow: 6px 6px 0 var(--black);
+    background: var(--white); /* Retain initial background */
+    display: block;
+    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+}
+.social-card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+}
+.social-card:hover {
+    transform: scale(1.08) translateY(-15px);
+    box-shadow: 15px 15px 0 var(--black);
+    z-index: 5;
+}
+/* Specific styles for Instagram hover */
+.social-card[href*="instagram.com"]:hover {
+    transform: scale(1.08) translateY(-15px);
+    animation: instagram-shadow-cycle 6s infinite linear;
+}
+/* Specific twist for TikTok to ensure it rotates to the right */
+.social-card[href*="tiktok.com"]:hover {
+    transform: scale(1.08) translateY(-15px);
+    animation: tiktok-shadow-glitch 2s infinite ease-in-out;
+}
+.shop-card h3 { 
+    font-family: var(--font-bold); 
+    font-size: 1.3rem; 
+    margin: 8px 0; 
+    min-height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+}
+.shop-card .card-details {
+    font-size: 1rem; 
+    margin-bottom: 15px; 
+    color: var(--black); 
+    line-height: 1.4;
+    display: block; /* Now visible on the card */
+}
+.shop-card .price-tag,
+.shop-card .menu-add-btn,
+.joy-card .price-tag,
+.joy-card .menu-add-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 55px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border: var(--border) !important;
+    border-radius: 15px !important;
+    box-shadow: 4px 4px 0 var(--black) !important;
+    font-family: var(--font-bold) !important;
+    font-size: 1.1rem !important;
+    line-height: 1 !important;
+    padding: 0 15px !important;
+    margin: 0 !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    animation: none !important; /* Remove wiggle when inside a card to keep alignment */
+}
+
+.shop-card .price-tag,
+.joy-card .price-tag {
+    background: var(--accent) !important;
+    color: var(--black) !important;
+    margin-top: auto !important;
+    margin-bottom: 10px !important;
+}
+
+.shop-card .card-action,
+.joy-card .card-action {
+    width: 100%;
+    z-index: 10;
+}
+
+/* Prevent button misalignment during card hover */
+.shop-card:hover .menu-add-btn,
+.joy-card:hover .menu-add-btn {
+    transform: none !important;
+    box-shadow: 4px 4px 0 var(--black) !important;
+}
+
+/* Recommended Card (Home Slider) */
+.joy-card { 
+    padding: 20px; 
+    text-align: center; 
+    background: var(--white);
+    border: var(--border);
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 var(--black);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    margin: 0; /* Removed to fix grid fitting; spacing is handled by gap */
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+}
+.joy-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 12px 12px 0 var(--black);
+    z-index: 5;
+}
+.joy-card h3 { 
+    font-family: var(--font-bold); 
+    font-size: 1.3rem; 
+    margin: 8px 0; 
+    min-height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+}
+.joy-card .card-details { 
+    font-size: 1rem; 
+    margin-bottom: 15px; 
+    color: var(--black); 
+    line-height: 1.4; 
+    display: block; /* Now visible on the card */
+}
+.joy-img { 
+    width: 100%; aspect-ratio: 1/1; object-fit: cover; 
+    border: 2px solid var(--black);
+    border-radius: 15px; 
+    background: var(--white); 
+    margin-bottom: 12px;
+}
+
+/* Team Card (Story Page) */
+.team-card {
+    background: var(--white);
+    border: var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 6px 6px 0 var(--black);
+    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    position: relative;
+    overflow: visible;
+}
+.team-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 10px 10px 0 var(--black);
+    z-index: 5;
+}
+.team-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    margin-bottom: 0;
+    object-fit: cover;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+.team-info {
+    text-align: left;
+}
+.team-card h4 {
+    font-family: var(--font-bold);
+    color: var(--primary);
+    margin-bottom: 4px;
+    font-size: 1.2rem;
+}
+.team-card p { font-family: var(--font-bold); font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; color: var(--black); }
+
+
+/* Ensure slider slides stretch their content cards to full height */
+.splide__slide {
+    display: flex !important;
+    flex-direction: column;
+    height: auto;
+}

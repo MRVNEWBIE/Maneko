@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maneko | Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="filters.css">
+    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="modals.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="Maneko logo side remove background.png" alt="Maneko Logo" class="navbar-logo-img"></a>
+            <div class="nav-right">
+                <a href="index.html" class="nav-tab" data-i18n="home">Home</a>
+                <a href="menu.html" class="nav-tab active" data-i18n="menu">Menu</a>
+                <a href="story.html" class="nav-tab" data-i18n="story">Story</a>
+                <div class="lang-dropdown-wrapper">
+                    <button class="lang-nav-btn" onclick="toggleTranslatorDrawer()">🌐</button>
+                    <div id="lang-dropdown" class="lang-dropdown">
+                        <button class="lang-option" onclick="changeLanguage('en')">English</button>
+                        <button class="lang-option" onclick="changeLanguage('id')">Indonesia</button>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="nav-tab btn-animate" id="cart-count-wrapper" data-i18n="bag" onclick="toggleCart()">Bag (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="drawer-header">
+            <h2 data-i18n="your_bag">Your Bag</h2>
+        </div>
+        <div id="cart-items-list"></div>
+        <div class="cart-summary-footer">
+            <div class="cart-total">
+                <span data-i18n="subtotal">Subtotal:</span>
+                <span id="cart-subtotal">0 Rp</span>
+            </div>
+            <span id="drawer-warning" style="color: var(--primary); font-size: 0.85rem; text-align: center; margin-bottom: 10px; display: block; font-weight: 700;"></span>
+            <button class="btn-animate checkout-btn w-100" data-i18n="checkout">Checkout</button>
+            <a href="javascript:void(0)" onclick="toggleCart(false)" class="btn-animate w-100" data-i18n="continue" style="text-align: center; margin-top: 10px; background: var(--accent); color: var(--black); text-decoration: none; display: block;">Continue Shopping</a>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="overlay" onclick="toggleCart(false); toggleTranslatorDrawer(false);"></div>
+
+    <div class="checker-border">
+    <main class="menu-container">
+        <div class="menu-paper">
+        <h1 class="section-title" data-i18n="choose_flavor">Choose Your Flavor</h1>
+        
+        <!-- FILTER & SEARCH NAVIGATION -->
+        <div class="filter-container">
+            <div class="search-box">
+                <input type="text" id="menu-search" class="search-input" data-i18n-placeholder="search_placeholder" placeholder="Type food name here...">
+            </div>
+            
+            <div class="filter-nav">
+                <button class="filter-btn active" data-filter="all" data-i18n="categories.all">All</button>
+                <button class="filter-btn" data-filter="noodles" data-i18n="categories.noodles">Noodles</button>
+                <button class="filter-btn" data-filter="rice" data-i18n="categories.rice">Rice</button>
+                <button class="filter-btn" data-filter="dimsum" data-i18n="categories.dimsum">Dimsum</button>
+            </div>
+            <div class="price-adjuster">
+                <label class="price-label" data-i18n="max_price">Max Price</label>
+                <div class="price-controls">
+                    <button id="price-down" class="arrow-btn">◀</button>
+                    <div class="price-display">
+                        <input type="number" id="current-price-input" value="30000" min="28000" max="30000" step="1000">
+                        <span>Rp</span>
+                    </div>
+                    <button id="price-up" class="arrow-btn">▶</button>
+                </div>
+                <span class="price-warning-text" data-i18n="range">Range: 28k - 30k</span>
+            </div>
+
+            <button id="reset-filters" class="reset-btn" data-i18n="reset_filter">Reset Category</button>
+        </div>
+
+        <div class="menu-grid">
+            <!-- JOHANNA MENU -->
+            <div class="shop-card" data-category="noodles" data-price="28000" data-name="Aglio Olio" data-details="" data-img="aglio.png" data-product-id="jo-1">
+                <img src="aglio.png">
+                <h3>Aglio Olio</h3>
+                <div class="price-tag">28.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Aglio Olio', 28000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="noodles" data-price="30000" data-name="Fettucini Carbonara" data-details="" data-img="dish.png" data-product-id="jo-2">
+                <img src="dish.png">
+                <h3>Fettucini Carbonara</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Fettucini Carbonara', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="30000" data-name="Chicken teriyaki + rice" data-details="" data-img="teriyaki.png" data-product-id="jo-3">
+                <img src="teriyaki.png">
+                <h3>Chicken Teriyaki + Rice</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Chicken teriyaki + rice', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="30000" data-name="Chicken curry + rice" data-details="" data-img="curry.png" data-product-id="jo-4">
+                <img src="curry.png">
+                <h3>Chicken Curry + Rice</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Chicken curry + rice', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="30000" data-name="Ayam wijen + rice" data-details="" data-img="dish.png" data-product-id="jo-5">
+                <img src="dish.png">
+                <h3>Ayam Wijen + Rice</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Ayam wijen + rice', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="30000" data-name="Ikan cakalang asap + rice" data-details="" data-img="seafood.png" data-product-id="jo-6">
+                <img src="seafood.png">
+                <h3>Ikan Cakalang Asap + Rice</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Ikan cakalang asap + rice', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="28000" data-name="Fried rice" data-details="" data-img="beef-fried-rice.png" data-product-id="jo-7">
+                <img src="beef-fried-rice.png">
+                <h3>Fried Rice</h3>
+                <div class="price-tag">28.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Fried rice', 28000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <!-- TATA'S MOM MENU -->
+            <div class="shop-card" data-category="rice" data-price="30000" data-name="Honey soy crispy chicken + gimbab ori" data-details="" data-img="honey.png" data-product-id="tata-1">
+                <img src="honey.png">
+                <h3>Honey Soy Crispy Chicken + Gimbab Ori</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Honey soy crispy chicken + gimbab ori', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="28000" data-name="Sambal matah crispy chicken + Nasi daun jeruk" data-details="" data-img="dish.png" data-product-id="tata-2">
+                <img src="dish.png">
+                <h3>Sambal Matah Crispy Chicken + Nasi Daun Jeruk</h3>
+                <div class="price-tag">28.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Sambal matah crispy chicken + Nasi daun jeruk', 28000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="dimsum" data-price="30000" data-name="Dimsum mentai isi 6" data-details="" data-img="dish.png" data-product-id="tata-3">
+                <img src="dish.png">
+                <h3>Dimsum Mentai (6 pcs)</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Dimsum mentai isi 6', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="28000" data-name="Tempura mayo + garlic butter rice" data-details="" data-img="dish.png" data-product-id="tata-4">
+                <img src="dish.png">
+                <h3>Tempura Mayo + Garlic Butter Rice</h3>
+                <div class="price-tag">28.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Tempura mayo + garlic butter rice', 28000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="28000" data-name="chicken katsu mentai rice" data-details="" data-img="dish.png" data-product-id="tata-5">
+                <img src="dish.png">
+                <h3>Chicken Katsu Mentai Rice</h3>
+                <div class="price-tag">28.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('chicken katsu mentai rice', 28000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <div class="shop-card" data-category="rice" data-price="30000" data-name="Ayam Geprek w/rice or w/fried noodle" data-variants="with_rice,with_noodle" data-details="" data-img="mie-goreng.png" data-product-id="tata-6">
+                <img src="mie-goreng.png">
+                <h3>Ayam Geprek</h3>
+                <div class="price-tag">30.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Ayam Geprek w/rice or w/fried noodle', 30000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+
+            <!-- 14th Food Item -->
+            <div class="shop-card" data-category="rice" data-price="28000" data-name="Nasi bakar cakalang" data-details="" data-img="seafood.png" data-product-id="tata-7">
+                <img src="seafood.png">
+                <h3>Baked Skipjack Tuna Rice</h3>
+                <div class="price-tag">28.000 Rp</div>
+                <div class="card-action">
+                    <button class="btn-animate menu-add-btn" onclick="addToCart('Nasi bakar cakalang', 28000, 1, this)">Add to Bag +</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    </div>
+
+
+    <!-- PRODUCT DETAIL PAGE MODAL -->
+    <div id="pdp-overlay" class="pdp-overlay">
+        <div id="pdp-modal" class="pdp-modal">
+            <button class="modal-close-btn" onclick="document.getElementById('pdp-overlay').click()">✕</button>
+            <div class="pdp-content-wrapper">
+                <div class="pdp-image-gallery">
+                    <img id="pdp-main-image" src="" alt="Product Image" class="pdp-main-image">
+                </div>
+                <div id="pdp-badges-container" style="display: flex; gap: 10px; margin-bottom: 10px;"></div>
+                <div class="pdp-info-panel">
+                    <div id="pdp-category-badge" class="category-badge"></div>
+                    <h2 id="pdp-product-name"></h2>
+                    <p class="pdp-price" id="pdp-product-price"></p>
+                    
+                    <div class="pdp-facts">
+                        <div class="fact-tag">10-15 mins</div>
+                        <div class="fact-tag">served hot</div>
+                        <div class="fact-tag">fresh ingredients</div>
+                    </div>
+
+                    <p data-i18n="pdp_tags.desc" style="font-family: var(--font-bold); font-size: 0.95rem; margin-bottom: 5px; color: var(--primary);">Description</p>
+                    <p class="pdp-description" id="pdp-product-description"></p>
+
+                    <div id="pdp-variant-selector" class="pdp-variants" style="display: none; margin-bottom: 20px;">
+                        <p data-i18n="choose_flavor" style="font-family: var(--font-bold); margin-bottom: 10px; color: var(--primary);">Choose Your Flavor</p>
+                        <div id="variant-options" class="payment-methods-group" style="flex-direction: row; gap: 10px;"></div>
+                    </div>
+
+                    <div class="pdp-action-zone">
+                        <div class="quantity-selector">
+                            <button id="pdp-qty-down">-</button>
+                            <input type="number" id="pdp-qty-input" value="1" min="1">
+                            <button id="pdp-qty-up">+</button>
+                        </div>
+                        <button id="pdp-add-to-bag" class="btn-animate pdp-add-to-bag">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-left-group">
+                <div class="footer-contact">
+                    <a href="https://wa.me/628118709133" class="footer-whatsapp" target="_blank">
+                        <span>WhatsApp: +62 811 8709 133</span>
+                    </a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/maneko_kg/?hl=en" target="_blank" class="ig-logo"><img src="instagramlogo.png" alt="Instagram"></a>
+                    <a href="https://www.tiktok.com/@maneko_kg" target="_blank" class="tt-logo"><img src="tiktoklogo.png" alt="TikTok"></a>
+                </div>
+            </div>
+            <div class="footer-center-logo">
+                <img src="Maneko logo remove background.png" alt="Maneko Logo" class="footer-logo-img">
+            </div>
+            <div class="footer-right-group">
+                <nav class="footer-nav">
+                    <a href="index.html" data-i18n="home">Home</a>
+                    <a href="menu.html" data-i18n="menu">Menu</a>
+                    <a href="story.html" data-i18n="story">Story</a>
+                </nav>
+            </div>
+            <p>© 2026 maneko. <span data-i18n="all_rights">all rights reserved.</span> <span class="footer-mascot-animation">ฅ^<span class="mascot-text-blink">•</span>⩊<span class="mascot-text-blink">•</span>^ฅ</span></p>
+        </div>
+    </footer>
+
+    <a href="javascript:void(0)" class="scroll-to-top-btn" data-i18n="top">TOP</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="translations.js"></script>
+    <script src="cart.js"></script>
+    <script src="ui-helpers.js"></script>
+    <script src="modals.js"></script>
+    <script src="navigation.js"></script>
+    <script src="app.js"></script>
+    <script src="menu-filters.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+:root {
+    --primary: #E63926;
+    --accent: #F2B735;
+    --bg: #FFF9E6;
+    --black: #3D1A16;
+    --white: #ffffff;
+    --border: 4px solid var(--black);
+    --font-bold: 'Fredoka', sans-serif;
+    --font-main: 'Quicksand', sans-serif;
+}

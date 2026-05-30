@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maneko | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="filters.css">
+    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="modals.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="Maneko logo side remove background.png" alt="Maneko Logo" class="navbar-logo-img"></a>
+            <div class="nav-right">
+                <a href="index.html" class="nav-tab active" data-i18n="home">Beranda</a>
+                <a href="menu.html" class="nav-tab" data-i18n="menu">Menu</a>
+                <a href="story.html" class="nav-tab" data-i18n="story">Cerita</a>
+                <div class="lang-dropdown-wrapper">
+                    <button class="lang-nav-btn" onclick="toggleTranslatorDrawer()">🌐</button>
+                    <div id="lang-dropdown" class="lang-dropdown">
+                        <button class="lang-option" onclick="changeLanguage('en')">English</button>
+                        <button class="lang-option" onclick="changeLanguage('id')">Indonesia</button>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="nav-tab btn-animate" id="cart-count-wrapper" data-i18n="bag" onclick="toggleCart()">Tas (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO HEADER -->
+    <header class="hero-section">
+        <p data-i18n="hero_tag" style="text-transform: none; margin-top: 0;">Menyajikan makanan lezat di Kampus USG Education Kelapa Gading!</p>
+        <img src="Maneko logo remove background.png" alt="Maneko Logo" class="hero-logo-img">
+        <p data-i18n="hero_info.time">⏰ Sen - Jum [12-1 Siang]</p>
+        <p data-i18n="hero_info.loc" style="margin-top: 10px;">📍Suite Life, Sedayu City, Lt 2</p>
+    </header>
+
+    <!-- 2. RECOMMENDED MENU SLIDER -->
+    <section class="recommended-menu-section">
+        <h2 class="section-title" data-i18n="rec_title">Menu Rekomendasi Kami</h2>
+        <div id="menu-slider" class="splide" aria-label="Favorite Menu">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <!-- Favorite: Aglio Olio -->
+                    <li class="splide__slide">
+                        <div class="joy-card" data-category="noodles" data-price="28000" data-name="Aglio Olio" data-details="" data-img="aglio.png" data-product-id="jo-1">
+                            <img src="aglio.png" class="joy-img" alt="Aglio Olio" loading="lazy">
+                            <h3>Aglio Olio Pasta</h3>
+                            <div class="price-tag">28.000 Rp</div>
+                            <div class="card-action">
+                                <button class="btn-animate menu-add-btn" onclick="addToCart('Aglio Olio', 28000, 1, this)">Add to Bag +</button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Favorite: Honey Soy Crispy Chicken + Gimbab -->
+                    <li class="splide__slide">
+                        <div class="joy-card" data-category="rice" data-price="30000" data-name="Honey soy crispy chicken + gimbab ori" data-details="" data-img="honey.png" data-product-id="tata-1">
+                            <img src="honey.png" class="joy-img" alt="Honey Soy Chicken" loading="lazy">
+                            <h3>Honey Soy Chicken + Gimbab</h3>
+                            <div class="price-tag">30.000 Rp</div>
+                            <div class="card-action">
+                                <button class="btn-animate menu-add-btn" onclick="addToCart('Honey soy crispy chicken + gimbab ori', 30000, 1, this)">Add to Bag +</button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Favorite: Tempura Mayo + Garlic Butter Rice -->
+                    <li class="splide__slide">
+                        <div class="joy-card" data-category="rice" data-price="28000" data-name="Tempura mayo + garlic butter rice" data-details="" data-img="dish.png" data-product-id="tata-4">
+                            <img src="dish.png" class="joy-img" alt="Tempura Mayo" loading="lazy">
+                            <h3>Tempura Mayo + Garlic Rice</h3>
+                            <div class="price-tag">28.000 Rp</div>
+                            <div class="card-action">
+                                <button class="btn-animate menu-add-btn" onclick="addToCart('Tempura mayo + garlic butter rice', 28000, 1, this)">Add to Bag +</button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- New: Ayam Geprek -->
+                    <li class="splide__slide">
+                        <div class="joy-card" data-category="rice" data-price="30000" data-name="Ayam Geprek w/rice or w/fried noodle" data-variants="with_rice,with_noodle" data-details="" data-img="mie-goreng.png" data-product-id="tata-6">
+                            <img src="mie-goreng.png" class="joy-img" alt="Ayam Geprek" loading="lazy">
+                            <h3>Ayam Geprek</h3>
+                            <div class="price-tag">30.000 Rp</div>
+                            <div class="card-action">
+                                <button class="btn-animate menu-add-btn" onclick="addToCart('Ayam Geprek w/rice or w/fried noodle', 30000, 1, this)">Add to Bag +</button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- New: Ikan Cakalang Asap -->
+                    <li class="splide__slide">
+                        <div class="joy-card" data-category="rice" data-price="30000" data-name="Ikan cakalang asap + rice" data-details="" data-img="seafood.png" data-product-id="jo-6">
+                            <img src="seafood.png" class="joy-img" alt="Ikan Cakalang" loading="lazy">
+                            <h3>Ikan Cakalang Asap + Rice</h3>
+                            <div class="price-tag">30.000 Rp</div>
+                            <div class="card-action">
+                                <button class="btn-animate menu-add-btn" onclick="addToCart('Ikan cakalang asap + rice', 30000, 1, this)">Add to Bag +</button>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- New: Nasi Bakar Cakalang -->
+                    <li class="splide__slide">
+                        <div class="joy-card" data-category="rice" data-price="28000" data-name="Nasi bakar cakalang" data-details="" data-img="seafood.png" data-product-id="tata-7">
+                            <img src="seafood.png" class="joy-img" alt="Nasi Bakar" loading="lazy">
+                            <h3>Nasi Bakar Cakalang</h3>
+                            <div class="price-tag">28.000 Rp</div>
+                            <div class="card-action">
+                                <button class="btn-animate menu-add-btn" onclick="addToCart('Nasi bakar cakalang', 28000, 1, this)">Add to Bag +</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. THE CONTEXT/STORY -->
+    <div class="checker-border">
+        <section class="story-section reveal">
+            <div class="story-content">
+                <div class="story-text">
+                    <span id="vision-accent" class="story-accent" data-i18n="story_vision">Visi Pendiri Kami</span>
+                    <h2 data-i18n="vision.title">Maneko lahir dari keinginan sederhana: makanan lezat dan terjangkau untuk mahasiswa.</h2>
+                    <p data-i18n="vision.p">Sebagai seorang mahasiswa, saya sering kesulitan menemukan pilihan makanan yang memuaskan dan sehat yang sesuai dengan anggaran dan jadwal sibuk saya. Itulah mengapa saya menciptakan Maneko – untuk menawarkan hidangan berkualitas tinggi yang menggugah selera untuk mengisi tenaga fisik dan pikiran, memastikan setiap mahasiswa dapat menikmati cita rasa rumahan tanpa menguras kantong.</p>
+                </div>
+                <div class="owner-column">
+                    <img src="mascot.png" alt="Maneko Mascot" class="story-img">
+                    <p class="owner-name" data-i18n="vision.founder">— oleh Kimberly Adi Putri, Pendiri</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Button to Story Tab -->
+    <div class="reveal" style="text-align: center; margin-top: -30px; margin-bottom: 60px; position: relative; z-index: 10;">
+        <a href="story.html" class="btn-big btn-animate" data-i18n="read_story" style="background: var(--accent); color: var(--black);">BACA CERITA KAMI</a>
+    </div>
+
+    <!-- 4. REVIEWS CAROUSEL (L to R Marquee) -->
+    <section class="campus-talk">
+        <h2 class="section-title" data-i18n="campus_talk">Campus Talk</h2>
+        <div class="marquee-window">
+            <div class="marquee-track scroll-right">
+                <div class="marquee-content">
+                    <div class="review-box">"Best lunch on campus."</div>
+                    <div class="review-box">"Actual premium taste."</div>
+                    <div class="review-box">"Worth every penny."</div>
+                    <div class="review-box">"The chicken curry is life-changing."</div>
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    <div class="review-box">"Best lunch on campus."</div>
+                    <div class="review-box">"Actual premium taste."</div>
+                    <div class="review-box">"Worth every penny."</div>
+                    <div class="review-box">"The chicken curry is life-changing."</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SOCIAL MEDIA WIDGET -->
+    <section class="social-section">
+        <h2 class="section-title" data-i18n="social_title">Follow us on Instagram & TikTok</h2>
+        <div class="social-grid">
+            <a href="https://www.instagram.com/reel/DXMSN6qRe6L/?hl=en" target="_blank" class="social-card"><img src="instagrampost1.png" alt="Instagram Post" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@maneko_kg/video/7543210839407643960" target="_blank" class="social-card"><img src="Tiktokpost1.jpg" alt="TikTok Post" loading="lazy"></a>
+            <a href="https://www.instagram.com/reel/DNMv8Y4x8h1/?hl=en" target="_blank" class="social-card"><img src="instagrampost2.png" alt="Instagram Post" loading="lazy"></a>
+            <a href="https://www.tiktok.com/@maneko_kg/video/7469704371996069126" target="_blank" class="social-card"><img src="Tiktokpost2.jpg" alt="TikTok Post" loading="lazy"></a>
+        </div>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+            <a href="https://www.instagram.com/maneko_kg/?hl=en" target="_blank" class="btn-animate btn-instagram" data-i18n="Instagram" style="text-decoration: none;">Instagram</a>
+            <a href="https://www.tiktok.com/@maneko_kg" target="_blank" class="btn-animate btn-tiktok" data-i18n="TikTok" style="text-decoration: none;">TikTok</a>
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAIL PAGE MODAL -->
+    <div id="pdp-overlay" class="pdp-overlay">
+        <div id="pdp-modal" class="pdp-modal">
+            <button class="modal-close-btn" onclick="document.getElementById('pdp-overlay').click()">✕</button>
+            <div class="pdp-content-wrapper">
+                <div class="pdp-image-gallery">
+                    <img id="pdp-main-image" src="" alt="Product Image" class="pdp-main-image">
+                </div>
+                <div id="pdp-badges-container" style="display: flex; gap: 10px; margin-bottom: 10px;"></div>
+                <div class="pdp-info-panel">
+                    <div id="pdp-category-badge" class="category-badge"></div>
+                    <h2 id="pdp-product-name"></h2>
+                    <p class="pdp-price" id="pdp-product-price"></p>
+                    
+                    <div class="pdp-facts">
+                        <div class="fact-tag">10-15 mins</div>
+                        <div class="fact-tag">served hot</div>
+                        <div class="fact-tag">fresh ingredients</div>
+                    </div>
+
+                    <p data-i18n="pdp_tags.desc" style="font-family: var(--font-bold); font-size: 0.95rem; margin-bottom: 5px; color: var(--primary);">Description</p>
+                    <p class="pdp-description" id="pdp-product-description"></p>
+                    
+                    <div id="pdp-variant-selector" class="pdp-variants" style="display: none; margin-bottom: 20px;">
+                        <p data-i18n="choose_flavor" style="font-family: var(--font-bold); margin-bottom: 10px; color: var(--primary);">Choose Your Flavor</p>
+                        <div id="variant-options" class="payment-methods-group" style="flex-direction: row; gap: 10px;"></div>
+                    </div>
+
+                    <div class="pdp-action-zone">
+                        <div class="quantity-selector">
+                            <button id="pdp-qty-down">-</button>
+                            <input type="number" id="pdp-qty-input" value="1" min="1">
+                            <button id="pdp-qty-up">+</button>
+                        </div>
+                        <button id="pdp-add-to-bag" class="btn-animate pdp-add-to-bag">Add to Bag</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIDEO MODAL -->
+    <div id="video-modal-overlay" class="pdp-overlay">
+        <div class="video-modal-container">
+            <button class="modal-close-btn" onclick="document.getElementById('video-modal-overlay').click()">✕</button>
+            <iframe id="video-modal-iframe" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-left-group">
+                <div class="footer-contact">
+                    <a href="https://wa.me/628118709133" class="footer-whatsapp" target="_blank">
+                        <span>WhatsApp: +62 811 8709 133</span>
+                    </a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/maneko_kg/?hl=en" target="_blank" class="ig-logo"><img src="instagramlogo.png" alt="Instagram"></a>
+                    <a href="https://www.tiktok.com/@maneko_kg" target="_blank" class="tt-logo"><img src="tiktoklogo.png" alt="TikTok"></a>
+                </div>
+            </div>
+            <div class="footer-center-logo">
+                <img src="Maneko logo remove background.png" alt="Maneko Logo" class="footer-logo-img">
+            </div>
+            <div class="footer-right-group">
+                <nav class="footer-nav">
+                    <a href="index.html" data-i18n="home">Home</a>
+                    <a href="menu.html" data-i18n="menu">Menu</a>
+                    <a href="story.html" data-i18n="story">Story</a>
+                </nav>
+            </div>
+            <p>© 2026 maneko. <span data-i18n="all_rights">all rights reserved.</span> <span class="footer-mascot-animation">ฅ^<span class="mascot-text-blink">•</span>⩊<span class="mascot-text-blink">•</span>^ฅ</span></p>
+        </div>
+    </footer>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="drawer-header">
+            <h2 data-i18n="your_bag">Your Bag</h2>
+        </div>
+        <div id="cart-items-list"></div>
+        <div class="cart-summary-footer">
+            <div class="cart-total">
+            <span data-i18n="subtotal">Subtotal:</span>
+                <span id="cart-subtotal">0 Rp</span>
+            </div>
+            <span id="drawer-warning" style="color: var(--primary); font-size: 0.85rem; text-align: center; margin-bottom: 10px; display: block; font-weight: 700;"></span>
+            <button class="btn-animate checkout-btn w-100" data-i18n="checkout">Checkout</button>
+            <a href="menu.html" class="btn-animate w-100" data-i18n="continue" style="text-align: center; margin-top: 10px; background: var(--accent); color: var(--black); text-decoration: none; display: block;">Continue Shopping</a>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="overlay" onclick="toggleCart(false); toggleTranslatorDrawer(false);"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="translations.js"></script>
+    <script src="cart.js"></script>
+    <script src="ui-helpers.js"></script>
+    <script src="modals.js"></script>
+    <script src="navigation.js"></script>
+    <script src="app.js"></script>
+    <script src="home-slider.js"></script>
+    <script src="menu-filters.js"></script>
+</body>
+</html>

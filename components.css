@@ -1,0 +1,531 @@
+/* GLOBAL ANIMATIONS */
+@keyframes page-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TYPOGRAPHY */
+.section-title { 
+    font-family: 'Pacifico', cursive; 
+    text-align: center; 
+    font-size: 2.5rem; 
+    color: var(--black);
+    background: var(--accent);
+    border-top: 4px solid var(--black);
+    border-bottom: 4px solid var(--black);
+    border-left: none;
+    border-right: none;
+    padding: 15px 25px; 
+    border-radius: 0;
+    margin-bottom: 15px; 
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    letter-spacing: 5px; /* Reduced stretching for a more balanced look */
+    transform: none;
+    box-shadow: 0 4px 0 var(--black);
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5); /* Subtle neon sign depth */
+}
+
+/* STICKER TITLE VARIATION (Unique for Story/Special headers) */
+.title-sticker {
+    font-family: var(--font-bold);
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--black);
+    background: var(--bg);
+    border: 3px solid var(--black);
+    padding: 8px 25px;
+    border-radius: 50px;
+    margin: 10px auto 15px;
+    width: fit-content;
+    box-shadow: 4px 4px 0 var(--black);
+    transform: rotate(1.5deg);
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* MAIN HEADING UNIQUE STYLE (Hand-Drawn Sticker with Tape) */
+.main-heading-unique {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 2.5rem; /* Base size for the greeting */
+    color: var(--white); /* Changed for visibility on red background */
+    background: none; /* Remove paper background */
+    border: none; /* Remove paper border */
+    border-radius: 0; /* Remove paper border-radius */
+    padding: 0; /* Remove paper padding */
+    margin: 20px auto 10px; /* Reduced margin to tighten the layout */
+    width: auto; /* Allow full width */
+    box-shadow: none; /* Remove paper shadow */
+    transform: none; /* Remove rotation */
+    display: block;
+    position: relative;
+}
+
+.main-heading-unique::before {
+    content: none; /* Remove tape effect */
+}
+
+.greeting-layer {
+    position: relative;
+    z-index: 1;
+    display: block;
+    /* Subtle shadow to keep it readable behind the black text */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+}
+
+.about-highlight {
+    font-family: var(--font-bold);
+    font-size: 8rem; /* Significantly larger */
+    color: var(--black); /* Black color for the About text */
+    display: block;
+    line-height: 0.9;
+    position: relative;
+    z-index: 2;
+    margin-top: -85px; /* Increased negative margin so the text "hits" and overlaps the greeting more */
+}
+
+/* SETTINGS BUTTON */
+.lang-nav-btn {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--black);
+    cursor: pointer;
+    transition: color 0.2s, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lang-nav-btn:hover {
+    color: var(--primary);
+}
+
+/* BUTTONS & ANIMATIONS */
+@keyframes btn-wiggle {
+    0%, 50%, 100% { transform: scale(1.05) translateY(-3px) rotate(0deg); }
+    25% { transform: scale(1.05) translateY(-3px) rotate(-1deg); }
+    75% { transform: scale(1.05) translateY(-3px) rotate(1deg); }
+}
+
+.btn-animate { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--border); 
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    box-shadow: 4px 4px 0 var(--black); 
+    cursor: pointer; 
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    font-family: var(--font-bold);
+    font-weight: 700;
+    background: var(--bg);
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    color: var(--black);
+    text-decoration: none !important;
+    outline: none;
+}
+.btn-animate::after, .btn-animate::before,
+.btn-big::after, .btn-big::before {
+    content: none !important;
+    display: none !important;
+}
+.btn-animate:hover { 
+    background: var(--accent);
+    color: var(--black); 
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 8px 8px 0 var(--black);
+}
+.btn-animate:active { 
+    transform: scale(0.95) translateY(2px); 
+    box-shadow: 2px 2px 0 var(--black);
+    animation: none;
+}
+
+/* Specific styles for Instagram button */
+.btn-instagram {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg) !important;
+    color: var(--black) !important;
+}
+.btn-instagram:hover {
+    background: var(--bg) !important;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--black);
+}
+
+/* Specific styles for TikTok button */
+.btn-tiktok {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--black) !important;
+    color: var(--white) !important;
+}
+.btn-tiktok:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--black);
+}
+.btn-tiktok:active {
+    transform: scale(0.95);
+}
+
+/* Brand colors for text spans */
+.text-instagram {
+    font-weight: bold;
+    font-family: var(--font-bold);
+    letter-spacing: 0.5px;
+}
+
+.text-tiktok {
+    font-weight: bold;
+    font-family: var(--font-bold);
+    letter-spacing: 0.5px;
+}
+
+/* Brand designs applied in buttons and section titles */
+.btn-instagram .text-instagram,
+.section-title .text-instagram {
+    background: linear-gradient(45deg, #f9f06b, #ff9e00, #ee2a7b, #7c2289, #0072b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    filter: drop-shadow(2px 2px 0px #F9F06B);
+}
+
+.btn-tiktok .text-tiktok,
+.section-title .text-tiktok {
+    display: inline-block;
+    text-shadow: 2px 0 0 #ee1d52, -2px 0 0 #69c9d0;
+}
+
+.btn-big { 
+    font-size: 1.5rem; padding: 15px 40px; background: var(--primary); color: white; 
+    border: var(--border); border-radius: 15px; box-shadow: 8px 8px 0 var(--black); 
+    text-decoration: none; display: inline-block; font-family: var(--font-bold); 
+}
+
+/* QUANTITY SELECTOR */
+.quantity-selector { 
+    display: flex; 
+    align-items: center; 
+    border: var(--border); 
+    border-radius: 12px; 
+    overflow: hidden; 
+    background: var(--bg); 
+    height: 50px; /* Match the height of the Add to Bag button */
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.quantity-selector button { 
+    background: var(--accent); 
+    border: none; 
+    width: 45px;
+    height: 100%;
+    cursor: pointer; 
+    font-family: var(--font-bold); 
+    font-size: 1.2rem;
+    transition: 0.2s; 
+}
+
+.quantity-selector button:active { background: var(--primary); color: white; }
+
+.quantity-selector input { 
+    width: 50px; 
+    height: 100%;
+    text-align: center; 
+    border: none; 
+    border-left: 3px solid var(--black); 
+    border-right: 3px solid var(--black); 
+    font-family: var(--font-bold); 
+    font-size: 1.1rem;
+    background: none; 
+    outline: none; 
+    -moz-appearance: textfield; /* Hide arrows in Firefox */
+}
+
+/* Hide Chrome/Safari/Edge Spin Buttons */
+.quantity-selector input::-webkit-outer-spin-button,
+.quantity-selector input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* CART ITEM LAYOUT (Inside Drawer) */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 15px;
+    border-bottom: 1px dashed rgba(0,0,0,0.1);
+}
+.cart-item > div:first-child {
+    flex: 1;
+    min-width: 0; /* Ensures the text wraps if it's too long */
+}
+
+/* DRAWER SPECIFIC QUANTITY STYLING */
+.quantity-selector.drawer-qty {
+    border: none;
+    background: none;
+    gap: 8px;
+    flex-shrink: 0; /* Prevents the buttons from being squished */
+}
+.qty-btn {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 0 !important;
+}
+.qty-btn:hover { transform: scale(1.2); }
+.qty-display { font-family: var(--font-bold); font-size: 1.1rem; min-width: 20px; text-align: center; }
+
+/* MASCOT TEXT BLINK */
+.mascot-text-blink {
+    display: inline-block;
+    transform-origin: center;
+    animation: text-blink 4s infinite;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+@keyframes text-blink {
+    0%, 45%, 55%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.1); }
+}
+
+/* SCROLL REVEAL SYSTEM */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition for scroll reveal */
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Secondary headings inside story/content blocks */
+.story-text h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.8rem; 
+    color: var(--black);
+    margin-bottom: 10px;
+    line-height: 1.2;
+    background: var(--bg);
+    border: 3px solid var(--black); /* Revert to original border */
+    padding: 5px 25px; /* Revert to original padding */
+    border-radius: 12px;
+    box-shadow: 4px 4px 0 var(--black); /* Revert to original shadow */
+    text-align: left; /* Revert to original alignment */
+    width: fit-content; /* Revert to original width */
+    margin-left: 0; /* Revert to original margin */
+    margin-right: 0; /* Revert to original margin */
+    transform: rotate(-1deg); /* Revert to original transform */
+}
+/* EVENT THEME DESIGNS */
+.theme-halloween .story-text h2,
+.theme-valentine .story-text h2,
+.theme-movie .story-text h2,
+.theme-sports .story-text h2 {
+    font-family: 'Pacifico', cursive; /* Already Pacifico, but keeping for clarity */
+    font-size: 2.8rem; 
+    background: var(--bg);
+    color: var(--black);
+    border: 3px solid var(--black); /* Revert to original border */
+    padding: 5px 25px; /* Revert to original padding */
+    border-radius: 12px; /* Revert to original border-radius */
+    box-shadow: 4px 4px 0 var(--black); /* Revert to original shadow */
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+    width: fit-content; /* Revert to original width */
+    margin-left: 0; /* Revert to original margin */
+    margin-right: 0; /* Revert to original margin */
+    transform: rotate(1deg); /* Revert to original transform */
+}
+
+.theme-halloween.story-block-v2 {
+    background: #FFF8F0;
+    box-shadow: 12px 12px 0 #FF9500;
+}
+
+.theme-halloween .story-block-img-v2 { 
+    box-shadow: 15px 15px 0 #FF9500; /* Spooky Orange */
+    border-color: #3D1A16;
+}
+.theme-halloween .story-accent { background: #FF9500; }
+
+.theme-halloween .story-text h2 {
+    background: #FF9500;
+    color: var(--white);
+}
+
+.theme-valentine.story-block-v2 {
+    background: #FFF0F3;
+    box-shadow: 12px 12px 0 #FF4D6D;
+}
+
+.theme-valentine .story-block-img-v2 { 
+    box-shadow: 15px 15px 0 #FF4D6D; /* Romance Pink */
+    border-color: #3D1A16;
+}
+.theme-valentine .story-accent { background: #FF4D6D; }
+
+.theme-valentine .story-text h2 {
+    background: #FF4D6D;
+    color: var(--white);
+}
+
+.theme-movie.story-block-v2 {
+    background: #F3E5F5;
+    box-shadow: 12px 12px 0 #7B2CBF;
+}
+
+.theme-movie .story-block-img-v2 { 
+    box-shadow: 15px 15px 0 #7B2CBF; /* Cinema Purple */
+    border-color: #3D1A16;
+}
+.theme-movie .story-accent { background: #7B2CBF; color: white; }
+
+.theme-movie .story-text h2 {
+    background: #7B2CBF;
+    color: var(--white);
+}
+
+.theme-sports.story-block-v2 {
+    background: #F1F8E9;
+    box-shadow: 12px 12px 0 #38B000;
+}
+
+.theme-sports .story-block-img-v2 { 
+    box-shadow: 15px 15px 0 #38B000; /* Active Green */
+    border-color: #3D1A16;
+}
+.theme-sports .story-accent { background: #38B000; }
+
+.theme-sports .story-text h2 {
+    background: #38B000;
+    color: var(--white);
+}
+
+.theme-aoa .story-block-img-v2 {
+    box-shadow: 15px 15px 0 var(--primary);
+}
+
+.story-inline-logo {
+    float: left;
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+    object-fit: contain;
+    margin-right: 15px; /* Space between logo and text */
+    margin-bottom: 10px; /* Space below logo if text wraps */
+}
+
+/* CAMPUS TALK MARQUEE */
+.marquee-track {
+    background-color: transparent;
+}
+
+.story-container-v2 {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.story-block-img-clean, .story-block-img-v2 {
+    max-width: 600px;
+    width: 100%;
+    object-fit: contain;
+    border: 4px solid var(--black);
+    box-shadow: 8px 8px 0 var(--black);
+    background: var(--bg);
+    padding: 10px;
+    cursor: zoom-in;
+}
+
+.story-block-v2 .story-block-img-clean { transform: none; }
+
+.story-accent {
+    background: var(--bg);
+    color: var(--black);
+    padding: 8px 25px; /* Increased padding */
+    font-family: var(--font-bold);
+    text-transform: uppercase;
+    font-size: 1.1rem; /* Increased font size */
+    border: 3px solid var(--black);
+    box-shadow: 4px 4px 0 var(--black);
+    transform: none;
+    display: inline-block;
+    text-decoration: none !important;
+    width: auto;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}
+
+.story-accent::after, .story-accent::before {
+    content: none !important;
+}
+
+.tape-effect {
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    background: rgba(242, 183, 53, 0.6);
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    z-index: 20;
+    pointer-events: none;
+    border-left: 2px dashed rgba(0,0,0,0.1);
+    border-right: 2px dashed rgba(0,0,0,0.1);
+}
+
+/* IMAGE POPUP MODAL STYLES */
+.image-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    cursor: zoom-out;
+}
+.image-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+.image-popup-content {
+    max-width: 90%;
+    max-height: 90%;
+    border: 5px solid white;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    object-fit: contain;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+.image-popup-overlay.active .image-popup-content {
+    transform: scale(1);
+}

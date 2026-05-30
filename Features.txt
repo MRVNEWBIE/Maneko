@@ -1,0 +1,7 @@
+Home tab structure:
+- Hero Header
+- Food Favorites Carousel (Auto-scrolls Right to Left Infinite Marquee CSS Animation.)
+- The Context/Story (Big Section)
+- The Reviews Carousel (Auto-scrolls Left to Right Infinite Marquee CSS Animation.)
+- Social Media Widget (Instagram/TikTok Grid)
+- Big Call-to-Action Button (Links to Menu)

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maneko | Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="Maneko logo side remove background.png" alt="Maneko Logo" class="navbar-logo-img"></a>
+            <div class="nav-right">
+                <a href="index.html" class="nav-tab" data-i18n="home">Home</a>
+                <a href="menu.html" class="nav-tab" data-i18n="menu">Menu</a>
+                <a href="story.html" class="nav-tab active" data-i18n="story">Story</a>
+                <div class="lang-dropdown-wrapper">
+                    <button class="lang-nav-btn" onclick="toggleTranslatorDrawer()">🌐</button>
+                    <div id="lang-dropdown" class="lang-dropdown">
+                        <button class="lang-option" onclick="changeLanguage('en')">English</button>
+                        <button class="lang-option" onclick="changeLanguage('id')">Indonesia</button>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="nav-tab btn-animate" id="cart-count-wrapper" data-i18n="bag" onclick="toggleCart()">Bag (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="drawer-header">
+            <h2 data-i18n="your_bag">Your Bag</h2>
+        </div>
+        <div id="cart-items-list"></div>
+        <div class="cart-summary-footer">
+            <div class="cart-total">
+                <span data-i18n="subtotal">Subtotal:</span>
+                <span id="cart-subtotal">0 Rp</span>
+            </div>
+            <span id="drawer-warning" style="color: var(--primary); font-size: 0.85rem; text-align: center; margin-bottom: 10px; display: block; font-weight: 700;"></span>
+            <button class="btn-animate checkout-btn w-100" data-i18n="checkout">Checkout</button>
+            <a href="menu.html" class="btn-animate w-100" data-i18n="continue" style="text-align: center; margin-top: 10px; background: var(--accent); color: var(--black); text-decoration: none; display: block;">Continue Shopping</a>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="overlay" onclick="toggleCart(false); toggleTranslatorDrawer(false);"></div>
+
+    <main>
+        <!-- 1. ABOUT US SECTION (White) -->
+        <section class="story-page-section-white">
+            <div class="story-container-v2">
+                <!-- ABOUT US HEADER -->
+                <h1 class="main-heading-unique reveal" data-i18n="story_content.about_us">Greetings! Get to know ABOUT...</h1>
+
+                <!-- Combined Box for Kitchen Order Rack & Board of Directors -->
+                <div class="story-section" style="max-width: 1100px;">
+                    <div class="order-rack-container">
+                        <div class="order-rack-bar"></div>
+                        <div class="order-papers">
+                            <div class="order-paper">
+                                <img src="Maneko logo remove background.png" alt="Maneko" class="paper-logo">
+                            </div>
+                            <div class="order-paper">
+                                <img src="Buisnesslogonobackground.png" alt="Business Club" class="paper-logo">
+                            </div>
+                            <div class="order-paper">
+                                <img src="aoa_logo.png" alt="AoA" class="paper-logo">
+                            </div>
+                        </div>
+
+                        <h2 class="section-title" data-i18n="story_content.us_label" style="margin-top: 60px; margin-bottom: 40px;">click the papers to know more</h2>
+
+                        <div class="order-rack-context">
+                            <!-- DEFAULT PLACEHOLDER ITEM (Dynamic Image) -->
+                            <div class="order-context-item is-placeholder active">
+                                <img id="placeholder-image" src="mascot.png" alt="Maneko Mascot" class="placeholder-img" style="cursor: zoom-in;" onclick="openImagePopup(this.src)">
+                                <p data-i18n="story_content.rack_placeholder"></p>
+                            </div>
+
+                            <div class="order-context-item">
+                                <div data-i18n="story_content.story_p"></div>
+                            </div>
+                            <div class="order-context-item">
+                                <div data-i18n="story_content.who_p"></div>
+                            </div>
+                            <div class="order-context-item">
+                                <div data-i18n="story_content.aoa_p"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="team-header-text" class="story-text" style="text-align: center; margin-top: 20px; margin-bottom: 0;">
+                        <span class="story-accent" data-i18n="team_title">Our Main Members</span>
+                        <h2 class="title-sticker" data-i18n="team_h2">The passionate minds behind your favorite dishes.</h2>
+                        <p data-i18n="team_p">Our team is a blend of culinary talent and community spirit, all dedicated to making your Maneko experience exceptional.</p>
+                    </div>
+
+                    <div class="team-grid">
+                    <!-- CEO -->
+                    <div class="team-card" data-name="Kimberly Adi Putri" data-role="Chief Executive Officer" data-bio="founder and visionary. kimberly started maneko to bridge the gap between student budgets and premium flavors. she leads the team with a passion for culinary innovation.">
+                        <img src="kimberly.png" alt="Kimberly" class="team-img">
+                        <div class="team-info">
+                            <h4>Kimberly Adi Putri</h4>
+                            <p>Chief Executive Officer</p>
+                        </div>
+                    </div>
+                    <!-- HR -->
+                    <div class="team-card" data-name="Emmanuella Lovelyn" data-role="Head of Human Resources Department" data-bio="building the maneko family. emmanuella focuses on culture and community, ensuring our team and our customers feel like part of something special.">
+                        <img src="emmanuella.png" alt="Emmanuella" class="team-img">
+                        <div class="team-info">
+                            <h4>Emmanuella Lovelyn</h4>
+                            <p>Head of Human Resources Department</p>
+                            <p class="team-bio"></p>
+                        </div>
+                    </div>
+                    <!-- COO -->
+                    <div class="team-card" data-name="Hadassah Edleina Umboh" data-role="Chief Operating Officer" data-bio="the heart of operations. hadassah ensures every ingredient is fresh and every process is smooth so that you get the best experience every time.">
+                        <img src="hadassah.png" alt="Hadassah" class="team-img">
+                        <div class="team-info">
+                            <h4>Hadassah Edleina Umboh</h4>
+                            <p>Chief Operating Officer</p>
+                            <p class="team-bio"></p>
+                        </div>
+                    </div>
+                    <!-- CFO -->
+                    <div class="team-card" data-name="Maximilian Andriel Yuwono" data-role="Chief Financial Officer" data-bio="the financial strategist. maximilian balances the books to keep our prices low and our quality high, making premium meals accessible to every student.">
+                        <img src="maximilian.png" alt="Maximilian" class="team-img">
+                        <div class="team-info">
+                            <h4>Maximilian Andriel Yuwono</h4>
+                            <p>Chief Financial Officer</p>
+                            <p class="team-bio"></p>
+                        </div>
+                    </div>
+                    <!-- CMO -->
+                    <div class="team-card" data-name="Roro Santika" data-role="Chief Marketing Officer" data-bio="the voice of maneko. roro brings our story to life through creative campaigns and social media, connecting us with the campus community we serve.">
+                        <img src="roro.png" alt="Roro" class="team-img">
+                        <div class="team-info">
+                            <h4>Roro Santika</h4>
+                            <p>Chief Marketing Officer</p>
+                            <p class="team-bio"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. OFFERINGS SECTION (Boxes) -->
+        <section class="story-page-section-boxes">
+            <div class="story-container-v2">
+                <h2 class="section-title reveal" data-i18n="story_content.offerings_title">Our Offerings</h2>
+                <div class="story-block-v2 reveal" style="flex-direction: column; gap: 20px;">
+                    <div style="display: flex; align-items: center; gap: 50px; width: 100%; flex-wrap: wrap;">
+                        <div class="story-text" style="flex: 1.4; min-width: 300px; padding: 10px;">
+                            <h2 data-i18n="story_content.maneko_menu_h2">Maneko Menu</h2>
+                            <div data-i18n="story_content.maneko_menu_p"></div>
+                        </div>
+                        <div style="position: relative; flex: 1; min-width: 300px; display: flex; justify-content: center;">
+                            <div class="tape-effect"></div>
+                            <img src="Manekomenu.png" alt="Maneko Menu" class="story-block-img-clean" style="max-width: 550px; cursor: zoom-in;" onclick="openImagePopup(this.src)">
+                        </div>
+                    </div>
+                    <p id="team-footer-text" data-i18n="team_footer" style="text-align: center; font-family: var(--font-bold); font-weight: 700; font-size: 1.2rem; color: var(--black); width: 100%; border-top: 2px dashed rgba(0,0,0,0.1); padding-top: 20px; margin-top: 40px;">Together, we're Maneko, and we're excited to serve you!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MANEKO EVENTS SECTION (Red) -->
+        <section class="story-page-section-red">
+            <div class="story-container-v2">
+                <h2 class="section-title reveal" data-i18n="story_content.goals_title">MANEKO EVENTS</h2>
+                
+                <!-- Halloween -->
+                <div class="story-block-v2 theme-halloween reveal">
+                    <div style="position: relative; flex-shrink: 0;">
+                        <div class="tape-effect"></div>
+                        <img src="our-goals.png" alt="Halloween" class="story-block-img-v2" onclick="openImagePopup(this.src)">
+                    </div>
+                    <div class="story-text">
+                        <h2 data-i18n="story_content.goals_h2">Halloween</h2>
+                        <p data-i18n="story_content.goals_p">We spooked up the campus with a legendary Halloween stall! From Bloody Strawberry Jelly to Choco-Graveyard Pudding, we served up spooky vibes and sweet treats, turning UIC KG into a festive gathering filled with laughter and that signature Maneko magic.</p>
+                    </div>
+                </div>
+
+                <!-- Valentine's Day -->
+                <div class="story-block-v2 theme-valentine reveal">
+                    <div style="position: relative; flex-shrink: 0;">
+                        <div class="tape-effect"></div>
+                        <img src="mascot.png" alt="Valentine's Day" class="story-block-img-v2" onclick="openImagePopup(this.src)">
+                    </div>
+                    <div class="story-text">
+                        <h2 data-i18n="story_content.valentine_h2">Valentine's Day</h2>
+                        <p data-i18n="story_content.valentine_p">Love was in the air—and in our bundles! We celebrated the season of love with exclusive deals for couples and squads. By pairing great food with shared moments, we turned a seasonal celebration into a massive success for the Maneko brand.</p>
+                    </div>
+                </div>
+
+                <!-- Movie Club -->
+                <div class="story-block-v2 theme-movie reveal">
+                    <div style="position: relative; flex-shrink: 0;">
+                        <div class="tape-effect"></div>
+                        <img src="our-goals.png" alt="Movie Club" class="story-block-img-v2" onclick="openImagePopup(this.src)">
+                    </div>
+                    <div class="story-text">
+                        <h2 data-i18n="story_content.movie_club_h2">Collaborate with Movie Club</h2>
+                            <p data-i18n="story_content.movie_club_p">Popcorn? Better! We teamed up with the Movie Club for a cozy screening of 'The Secret Life of Walter Mitty.' We brought the flavor with our signature sweet treats, creating the perfect flavorful backdrop for an unforgettable college movie night.</p>
+                    </div>
+                </div>
+
+                <!-- Sports & Arts Day -->
+                <div class="story-block-v2 theme-sports reveal">
+                    <div style="position: relative; flex-shrink: 0;">
+                        <div class="tape-effect"></div>
+                        <img src="our-goals.png" alt="Sports & Arts Day" class="story-block-img-v2" onclick="openImagePopup(this.src)">
+                    </div>
+                    <div class="story-text">
+                        <h2 data-i18n="story_content.sports_arts_h2">Sports & Arts Day Event</h2>
+                            <p data-i18n="story_content.sports_arts_p">Energy was at an all-time high at Galaxy Sports Center! Maneko fueled the competition with our signature meals and refreshing drinks. It wasn't just about the games; it was about the community coming together for a full day of flavorful energy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- TEAM MEMBER MODAL -->
+    <div id="team-overlay" class="pdp-overlay">
+        <div class="pdp-modal" style="max-width: 700px; width: 95%; padding: 40px;">
+            <button class="modal-close-btn" onclick="document.getElementById('team-overlay').click()">✕</button>
+            <div class="pdp-content-wrapper" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 25px;">
+                <div style="background: var(--accent); border: var(--border); border-radius: 50%; width: 120px; height: 120px; overflow: hidden; margin-bottom: 10px;">
+                    <img id="team-modal-img" src="mascot.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div>
+                    <h2 id="team-modal-name" style="font-family: var(--font-bold); font-weight: 700; margin-bottom: 10px; font-size: 2.2rem;"></h2>
+                    <p id="team-modal-role" style="font-family: var(--font-bold); color: var(--primary); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;"></p>
+                </div>
+                <p id="team-modal-bio" style="font-family: var(--font-main); font-size: 1.15rem; line-height: 1.7; font-weight: 500; color: var(--black);"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-left-group">
+                <div class="footer-contact">
+                    <a href="https://wa.me/628118709133" class="footer-whatsapp" target="_blank">
+                        <span>WhatsApp: +62 811 8709 133</span>
+                    </a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/maneko_kg/?hl=en" target="_blank" class="ig-logo"><img src="instagramlogo.png" alt="Instagram"></a>
+                    <a href="https://www.tiktok.com/@maneko_kg" target="_blank" class="tt-logo"><img src="tiktoklogo.png" alt="TikTok"></a>
+                </div>
+            </div>
+            <div class="footer-center-logo">
+                <img src="Maneko logo remove background.png" alt="Maneko Logo" class="footer-logo-img">
+            </div>
+            <div class="footer-right-group">
+                <nav class="footer-nav">
+                    <a href="index.html" data-i18n="home">Home</a>
+                    <a href="menu.html" data-i18n="menu">Menu</a>
+                    <a href="story.html" data-i18n="story">Story</a>
+                </nav>
+            </div>
+            <p>© 2026 maneko. <span data-i18n="all_rights">all rights reserved.</span> <span class="footer-mascot-animation">ฅ^<span class="mascot-text-blink">•</span>⩊<span class="mascot-text-blink">•</span>^ฅ</span></p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <a href="#" class="scroll-to-top-btn" data-i18n="top">TOP</a>
+
+    <script src="translations.js"></script>
+    <script src="cart.js"></script>
+    <script src="ui-helpers.js"></script>
+    <script src="navigation.js"></script>
+    <script src="app.js"></script>
+    <script src="modals.js"></script>
+</body>
+</html>
