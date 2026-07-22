@@ -1,11 +1,45 @@
 /** PAYMENT PAGE LOGIC: UI Interaction & Order Submission **/
+
+// Configuration
+const GLOW_EFFECT_DURATION = 2000; // milliseconds
+const TIMEOUT_DURATION = 30000; // 30 seconds
+
+// Note: The Google Apps Script URL should be moved to a backend environment variable
+// DO NOT keep sensitive URLs in client-side code
+// For now, we'll fetch it from a config endpoint
+let PAYMENT_API_ENDPOINT = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-order-btn');
     if (submitBtn) {
         submitBtn.addEventListener('click', processPayment);
     }
     initPaymentPage();
+    loadPaymentConfig();
 });
+
+/**
+ * Load payment API endpoint from a secure backend
+ * This prevents exposing sensitive URLs in client code
+ */
+async function loadPaymentConfig() {
+    try {
+        // Attempt to load from your backend config endpoint
+        // Replace with your actual backend URL
+        const response = await fetch('./config.json', {
+            method: 'GET',
+            credentials: 'same-origin'
+        });
+        if (response.ok) {
+            const config = await response.json();
+            PAYMENT_API_ENDPOINT = config.paymentEndpoint;
+        }
+    } catch (error) {
+        console.warn('Could not load payment config from backend');
+        // Fallback: Use environment variable if available
+        // PAYMENT_API_ENDPOINT = process.env.REACT_APP_PAYMENT_ENDPOINT || null;
+    }
+}
 
 function initPaymentPage() {
     const paymentSummary = document.getElementById('payment-summary-list');
@@ -61,15 +95,30 @@ function toggleQRIS(show) {
     container.style.display = show ? 'block' : 'none';
     if (show) {
         if (!document.getElementById('qris-scan-inline')) {
-            const scanText = getTranslation('scan_code');
-            container.insertAdjacentHTML('afterbegin', `<div id="qris-scan-inline" class="qris-inline-container"><p>${scanText}</p><img src="QRIZ_code.jpg" alt="QRIS Code" style="display:block; margin: 10px auto;"></div>`);
+            const scanText = typeof getTranslation === 'function' ? getTranslation('scan_code') : 'Scan QRIS Code';
+            const div = document.createElement('div');
+            div.id = 'qris-scan-inline';
+            div.className = 'qris-inline-container';
+            
+            const p = document.createElement('p');
+            p.textContent = scanText;
+            div.appendChild(p);
+            
+            const img = document.createElement('img');
+            img.src = 'QRIZ_code.jpg';
+            img.alt = 'QRIS Code';
+            img.style.display = 'block';
+            img.style.margin = 'auto';
+            div.appendChild(img);
+            
+            container.insertBefore(div, container.firstChild);
         }
     }
 }
 
 async function processPayment() {
     const submitBtn = document.getElementById('submit-order-btn');
-    const t = translations[currentLang];
+    const t = (typeof translations !== 'undefined' && translations && translations[currentLang]) || {};
     const currentCart = (typeof cart !== 'undefined') ? cart : [];
 
     const nameEl = document.getElementById('cust-name');
@@ -91,7 +140,7 @@ async function processPayment() {
     const invalidate = (el, warningId, message) => {
         const warningEl = document.getElementById(warningId);
         if (warningEl) {
-            warningEl.innerText = message;
+            warningEl.textContent = message;
             warningEl.style.display = 'block';
         }
 
@@ -107,33 +156,33 @@ async function processPayment() {
             setTimeout(() => {
                 el.style.borderColor = originalBorder;
                 el.style.boxShadow = originalShadow;
-            }, 2000);
+            }, GLOW_EFFECT_DURATION);
         }
         return false;
     };
 
     // Clear all previous warnings
     document.querySelectorAll('.warning-text').forEach(span => {
-        span.innerText = '';
+        span.textContent = '';
         span.style.display = 'none';
     });
 
-    // 3. Mandatory Field Validations: Checking 'Your Name' first
+    // 2. Mandatory Field Validations: Checking 'Your Name' first
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!nameEl || !nameEl.value.trim()) {
-        return invalidate(nameEl, 'name-warning', t.val_name);
+        return invalidate(nameEl, 'name-warning', t.val_name || 'Please enter your name');
     }
 
     if (!emailEl || !emailPattern.test(emailEl.value.trim())) {
-        return invalidate(emailEl, 'email-warning', t.val_email);
+        return invalidate(emailEl, 'email-warning', t.val_email || 'Please enter a valid email');
     }
 
     if (!phoneEl || !phoneEl.value.trim() || !/^\d+$/.test(phoneEl.value.trim())) {
-        return invalidate(phoneEl, 'phone-warning', t.val_phone);
+        return invalidate(phoneEl, 'phone-warning', t.val_phone || 'Please enter a valid phone number');
     }
 
-    if (!dateEl || !dateEl.value) return invalidate(dateEl, 'date-warning', t.val_date);
+    if (!dateEl || !dateEl.value) return invalidate(dateEl, 'date-warning', t.val_date || 'Please select a date');
 
     // Date Rule Validation: Must be in the future (Tomorrow or later)
     const selectedDate = new Date(dateEl.value);
@@ -146,27 +195,27 @@ async function processPayment() {
     minAllowedDate.setHours(0,0,0,0);
 
     if (selectedDate < minAllowedDate) {
-        return invalidate(dateEl, 'date-warning', t.val_date_future);
+        return invalidate(dateEl, 'date-warning', t.val_date_future || 'Please select a future date');
     }
 
     // Weekday Rule: 0 = Sun, 6 = Sat
     const day = selectedDate.getDay();
     if (day === 0 || day === 6) {
-        return invalidate(dateEl, 'date-warning', t.val_date_weekday);
+        return invalidate(dateEl, 'date-warning', t.val_date_weekday || 'Orders only on weekdays');
     }
 
     if (termsEl && !termsEl.checked) {
-        return invalidate(termsEl, 'checkbox-warning', t.val_terms);
+        return invalidate(termsEl, 'checkbox-warning', t.val_terms || 'Please accept terms');
     }
 
     if (correctnessEl && !correctnessEl.checked) {
-        return invalidate(correctnessEl, 'checkbox-warning', t.val_correct);
+        return invalidate(correctnessEl, 'checkbox-warning', t.val_correct || 'Please confirm correctness');
     }
 
     if (currentCart.length === 0) {
         const cartWarn = document.getElementById('cart-warning');
         if (cartWarn) {
-            cartWarn.innerText = t.val_empty;
+            cartWarn.textContent = t.val_empty || 'Your cart is empty';
             cartWarn.style.display = 'block';
             cartWarn.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -177,10 +226,9 @@ async function processPayment() {
         const methodGroup = document.querySelector('.payment-methods-group');
         if (methodGroup) {
             methodGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // You might want a specific warning for this, e.g., using notes-warning or a new one
             const notesWarn = document.getElementById('notes-warning');
             if (notesWarn) {
-                notesWarn.innerText = t.val_method;
+                notesWarn.textContent = t.val_method || 'Please select a payment method';
                 notesWarn.style.display = 'block';
             }
         }
@@ -195,21 +243,28 @@ async function processPayment() {
     // 3. Mandatory File Check for QRIS
     if (method === 'qris') {
         if (!qrisProofEl || qrisProofEl.files.length === 0) {
-            invalidate(qrisProofEl, 'qris-warning', t.val_qris);
+            invalidate(qrisProofEl, 'qris-warning', t.val_qris || 'Please upload QRIS proof');
+            return;
+        }
+
+        // Validate file size (max 5MB)
+        const maxFileSize = 5 * 1024 * 1024; // 5MB
+        if (qrisProofEl.files[0].size > maxFileSize) {
+            invalidate(qrisProofEl, 'qris-warning', 'File size must be less than 5MB');
             return;
         }
 
         // Disable button early for file processing
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerText = t.val_processing;
+            submitBtn.textContent = t.val_processing || 'Processing...';
         }
 
         const file = qrisProofEl.files[0];
         fileNameText = file.name;
         fileMimeTypeText = file.type;
 
-        // Convert image to Base64 string for transmission to Google Sheets
+        // Convert image to Base64 string for transmission
         fileDataText = await new Promise((resolve) => {
             const reader = new FileReader();
             reader.onloadend = () => resolve(reader.result.split(',')[1]);
@@ -220,7 +275,7 @@ async function processPayment() {
     // 4. Final Submission State
     if (submitBtn && !submitBtn.disabled) {
         submitBtn.disabled = true;
-        submitBtn.innerText = t.val_sending;
+        submitBtn.textContent = t.val_sending || 'Sending...';
     }
 
     const payload = {
@@ -229,46 +284,67 @@ async function processPayment() {
         "Name": nameEl.value.trim(),
         "Phone": phoneEl.value.trim(),
         "Order": currentCart.map(item => {
-            const foodEntry = t.food[item.name];
+            const foodEntry = t.food && t.food[item.name];
             const displayName = (foodEntry && typeof foodEntry === 'object') ? (foodEntry.name || item.name) : (foodEntry || item.name);
             const variantLabel = item.variant ? ` (${t[item.variant] || item.variant})` : '';
             return `${item.qty}x ${displayName}${variantLabel}`;
         }).join(' | '),
         "Order Type": orderTypeEl ? orderTypeEl.value : "Daily",
         "Pickup Date": dateEl.value,
-        "Special Instructions / Specific Needs": document.getElementById('cust-notes')?.value.trim() || "None",
-        "Amount of food": currentCart.reduce((sum, item) => sum + item.qty, 0),
-        "Total amount": document.getElementById('payment-total-amount')?.innerText || '0 Rp',
+        "Special Instructions / Specific Needs": (document.getElementById('cust-notes')?.value || '').trim() || "None",
+        "Amount of food": currentCart.reduce((sum, item) => sum + (item.qty || 0), 0),
+        "Total amount": document.getElementById('payment-total-amount')?.textContent || '0 Rp',
         "Payment method": method,
         "Order date": new Date().toLocaleDateString(),
         "Correctness": correctnessEl && correctnessEl.checked ? "Yes" : "No",
         "Email": emailEl.value.trim(),
-        "Proof link": method === 'qris' ? "Image Uploaded" : "N/A", // This will be replaced by the actual link from GAS
+        "Proof link": method === 'qris' ? "Image Uploaded" : "N/A",
         fileData: fileDataText,
         fileName: fileNameText,
         fileMimeType: fileMimeTypeText
     };
 
-    // Replace this string with your new Google Apps Script Deployment URL
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzBHlW4a-RrHT9XAvn3K5lygm3AW2_IF1L9hqiAYCSiBDApPaT8v7bqx_WOIXjUm8lG/exec'; 
+    // IMPORTANT: Move your Google Apps Script URL to a backend environment variable
+    // DO NOT hardcode sensitive URLs in client code
+    if (!PAYMENT_API_ENDPOINT) {
+        console.error('Payment endpoint not configured');
+        alert(t.val_failed_submit || 'Payment endpoint not available');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = t.place_order || 'Place Order';
+        }
+        return;
+    }
 
     try {
-        await fetch(scriptURL, {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_DURATION);
+
+        const response = await fetch(PAYMENT_API_ENDPOINT, {
             method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(payload)
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+            signal: controller.signal
         });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok && response.status !== 0) { // 0 status can occur with CORS
+            throw new Error(`Server returned ${response.status}`);
+        }
 
         // Show Success Modal instead of Alert
         showSuccessModal(payload);
         localStorage.removeItem('manekoCart');
         if (typeof updateCartUI === 'function') updateCartUI();
     } catch (error) {
-        console.error('Error!', error);
-        alert(getTranslation('val_failed_submit'));
+        console.error('Payment error:', error);
+        alert(t.val_failed_submit || 'Order submission failed. Please try again.');
         if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.innerText = getTranslation('place_order');
+            submitBtn.textContent = t.place_order || 'Place Order';
         }
     }
 }
@@ -277,28 +353,47 @@ function showSuccessModal(payload) {
     const overlay = document.getElementById('success-modal-overlay');
     if (!overlay) return;
 
-    const t = translations[currentLang];
+    const t = (typeof translations !== 'undefined' && translations && translations[currentLang]) || {};
 
-    // Fill user data
-    document.getElementById('res-name').innerText = payload["Name"];
-    document.getElementById('res-email').innerText = payload["Email"];
+    // Fill user data - safe text assignment
+    const resName = document.getElementById('res-name');
+    if (resName) resName.textContent = payload["Name"];
+    
+    const resEmail = document.getElementById('res-email');
+    if (resEmail) resEmail.textContent = payload["Email"];
     
     // Order Type display
-    const typeKey = payload["Order Type"];
-    const typeText = typeKey === 'Daily' ? t.daily_order_btn : t.pre_order_btn;
-    document.getElementById('res-type').innerText = typeText;
+    const resType = document.getElementById('res-type');
+    if (resType) {
+        const typeText = payload["Order Type"] === 'Daily' ? t.daily_order_btn : t.pre_order_btn;
+        resType.textContent = typeText;
+    }
 
     // Date display
-    document.getElementById('res-purchase-date').innerText = payload["Timestamp"];
-    document.getElementById('res-pickup-date').innerText = payload["Pickup Date"];
+    const resPurchaseDate = document.getElementById('res-purchase-date');
+    if (resPurchaseDate) resPurchaseDate.textContent = payload["Timestamp"];
+    
+    const resPickupDate = document.getElementById('res-pickup-date');
+    if (resPickupDate) resPickupDate.textContent = payload["Pickup Date"];
 
     // Method display
-    const methodKey = payload["Payment method"];
-    document.getElementById('res-method').innerText = t[methodKey] || methodKey;
+    const resMethod = document.getElementById('res-method');
+    if (resMethod) {
+        resMethod.textContent = t[payload["Payment method"]] || payload["Payment method"];
+    }
 
     // Copy order list and total from the main receipt
-    document.getElementById('res-summary-list').innerHTML = document.getElementById('payment-summary-list').innerHTML;
-    document.getElementById('res-total-amount').innerText = document.getElementById('payment-total-amount').innerText;
+    const resSummaryList = document.getElementById('res-summary-list');
+    const paymentSummaryList = document.getElementById('payment-summary-list');
+    if (resSummaryList && paymentSummaryList) {
+        resSummaryList.innerHTML = paymentSummaryList.innerHTML;
+    }
+    
+    const resTotalAmount = document.getElementById('res-total-amount');
+    const paymentTotalAmount = document.getElementById('payment-total-amount');
+    if (resTotalAmount && paymentTotalAmount) {
+        resTotalAmount.textContent = paymentTotalAmount.textContent;
+    }
 
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -308,11 +403,13 @@ function showSuccessModal(payload) {
     if (downloadBtn) {
         downloadBtn.onclick = async () => {
             const receiptArea = document.getElementById('receipt-to-download');
-            const canvas = await html2canvas(receiptArea, { backgroundColor: '#ffffff', scale: 2 });
-            const link = document.createElement('a');
-            link.download = `Maneko_Receipt_${payload["Name"].replace(/\s+/g, '_')}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
+            if (typeof html2canvas === 'function') {
+                const canvas = await html2canvas(receiptArea, { backgroundColor: '#ffffff', scale: 2 });
+                const link = document.createElement('a');
+                link.download = `Maneko_Receipt_${payload["Name"].replace(/\s+/g, '_')}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
         };
     }
 }
