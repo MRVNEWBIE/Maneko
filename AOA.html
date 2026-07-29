@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maneko | AoA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="Maneko logo side remove background.png" alt="Maneko Logo" class="navbar-logo-img"></a>
+            <div class="nav-right">
+                <a href="index.html" class="nav-tab" data-i18n="home">Home</a>
+                <a href="menu.html" class="nav-tab" data-i18n="menu">Menu</a>
+                <a href="story.html" class="nav-tab" data-i18n="story">Story</a>
+                <a href="AOA.html" class="nav-tab active" data-i18n="AOA">AoA</a>
+                <div class="lang-dropdown-wrapper">
+                    <button class="lang-nav-btn" onclick="toggleTranslatorDrawer()">🌐</button>
+                    <div id="lang-dropdown" class="lang-dropdown">
+                        <button class="lang-option" onclick="changeLanguage('en')">English</button>
+                        <button class="lang-option" onclick="changeLanguage('id')">Indonesia</button>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="nav-tab btn-animate" id="cart-count-wrapper" data-i18n="bag" onclick="toggleCart()">Bag (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="story-page-section-white">
+            <div class="story-container-v2" style="min-height: calc(100vh - 240px); display: flex; align-items: center; justify-content: center;">
+                <div class="story-section" style="max-width: 900px; width: 100%; text-align: center; padding: 80px 40px; background: var(--bg); border-radius: 32px; box-shadow: 0 24px 80px rgba(15, 23, 42, .12); border: var(--border);">
+                    <span class="story-accent" style="color: var(--black);">Arena of Ambition</span>
+                    <h1 class="main-heading-unique" style="margin-top: 24px; color: var(--black);">COMING SOON!</h1>
+                    <p style="margin: 24px auto 0; max-width: 650px; color: var(--black); font-size: 1.05rem; line-height: 1.8;">
+                        We are preparing a fresh page for the Arena of Ambition with the same Maneko style and energy. Check back soon for updates and the full experience.
+                    </p>
+                    <div style="margin-top: 36px;">
+                        <a href="index.html" class="btn-big btn-animate" style="background: var(--accent); color: var(--black); text-decoration: none;">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-left-group">
+                <div class="footer-contact">
+                    <a href="https://wa.me/628118709133" class="footer-whatsapp" target="_blank">
+                        <span>WhatsApp: +62 811 8709 133</span>
+                    </a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/maneko_kg/?hl=en" target="_blank" class="ig-logo"><img src="instagramlogo.png" alt="Instagram"></a>
+                    <a href="https://www.tiktok.com/@maneko_kg" target="_blank" class="tt-logo"><img src="tiktoklogo.png" alt="TikTok"></a>
+                </div>
+            </div>
+            <div class="footer-center-logo">
+                <img src="Maneko logo remove background.png" alt="Maneko Logo" class="footer-logo-img">
+            </div>
+            <div class="footer-right-group">
+                <nav class="footer-nav">
+                    <a href="index.html" data-i18n="home">Home</a>
+                    <a href="menu.html" data-i18n="menu">Menu</a>
+                    <a href="story.html" data-i18n="story">Story</a>
+                    <a href="AOA.html" class="footer-aoa-btn" data-i18n="AOA">AoA</a>
+                </nav>
+            </div>
+            <p>© 2026 maneko. <span data-i18n="all_rights">all rights reserved.</span> <span class="footer-mascot-animation">ฅ^<span class="mascot-text-blink">•</span>⩊<span class="mascot-text-blink">•</span>^ฅ</span></p>
+        </div>
+    </footer>
+
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="drawer-header">
+            <h2 data-i18n="your_bag">Your Bag</h2>
+        </div>
+        <div id="cart-items-list"></div>
+        <div class="cart-summary-footer">
+            <div class="cart-total">
+                <span data-i18n="subtotal">Subtotal:</span>
+                <span id="cart-subtotal">0 Rp</span>
+            </div>
+            <span id="drawer-warning" style="color: var(--primary); font-size: 0.85rem; text-align: center; margin-bottom: 10px; display: block; font-weight: 700;"></span>
+            <button class="btn-animate checkout-btn w-100" data-i18n="checkout">Checkout</button>
+            <a href="menu.html" class="btn-animate w-100" data-i18n="continue" style="text-align: center; margin-top: 10px; background: var(--accent); color: var(--black); text-decoration: none; display: block;">Continue Shopping</a>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="overlay" onclick="toggleCart(false); toggleTranslatorDrawer(false);"></div>
+
+    <script src="translations.js"></script>
+    <script src="cart.js"></script>
+    <script src="ui-helpers.js"></script>
+    <script src="navigation.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
